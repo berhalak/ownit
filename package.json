@@ -1,11 +1,13 @@
 {
-  "name": "@berhalak/ownit",
+  "name": "ownit",
   "private": false,
   "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/berhalak/ownit.git",
   "author": "Jarosław Sadziński <jaroslaw.sadzinski@gmail.com>",
+  "description": "Disposable observables and computed values",
+  "keywords": ["observable", "computed", "disposable", "reactive"],
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.4.1",
