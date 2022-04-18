@@ -9,7 +9,6 @@ export function reactive<T>(owner: Owner|null, fun:ComputedFunc<T>): Computed<T>
   return comp;
 }
 
-
 export interface ObsArray<T = any> extends Observable<T[]> {
   get(): T[];
   get(index: number): T|undefined;
@@ -131,7 +130,6 @@ class ObsSetImpl<K> extends ObservableImpl<Set<K>> implements ObsSet<K> {
 export function obsSet<T=any>(owner: Owner|null, value?: Set<T>): ObsSet<T> {
   return new ObsSetImpl(owner, value ?? new Set());
 }
-
 
 export interface ObsJson<T> extends Observable<T> {
   has(key: keyof T): boolean;

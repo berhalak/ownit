@@ -246,7 +246,7 @@ export class ComputedImpl<T = any> extends ObservableImpl<T> implements Computed
   }
   set(value: T) {
     if (this._onSet) this._onSet(value);
-    else throw new Error("Comptued is not writable");
+    else throw new Error("Computed is not writable");
   }
   get() {
     if (this._isDirty) {
