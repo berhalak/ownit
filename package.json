@@ -3,14 +3,21 @@
   "private": false,
   "version": "0.0.1",
   "main": "dist/index.js",
+  "module": "dist/ownit.mjs",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/berhalak/ownit.git",
   "author": "Jarosław Sadziński <jaroslaw.sadzinski@gmail.com>",
   "description": "Disposable observables and computed values",
-  "keywords": ["observable", "computed", "disposable", "reactive"],
+  "keywords": [
+    "observable",
+    "computed",
+    "disposable",
+    "reactive"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.4.1",
+    "esbuild": "^0.14.36",
     "jest": "27.5.1",
     "ts-jest": "27.1.4",
     "ts-node": "^10.7.0",
@@ -18,7 +25,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && npm run build:esm",
+    "build:esm": "esbuild src/index.ts --bundle --sourcemap --target=chrome99 --outfile=dist/ownit.mjs --format=esm",
     "deploy": "npm run build && npm publish --access public"
   }
 }
