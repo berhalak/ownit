@@ -238,6 +238,7 @@ export interface ObsMap<K = string, V = any> extends Owner {
   keys(): K[];
   values(): V[];
   delete(key: K): void;
+  assign(value: any): void;
 }
 
 export function obsMap<K = string, V = any>(owner: Owner | null, value: any): ObsMap<K, V> {
@@ -251,15 +252,7 @@ class ObsMapImpl extends Owner implements ObsMap<any, any> {
   constructor(owner: Owner | null, value: any) {
     super();
     owner?.owns(this);
-    if (value instanceof Map) {
-      for (const key of value.keys()) {
-        this.set(key, value.get(key));
-      }
-    } else {
-      for (const key of Object.keys(value)) {
-        this.set(key, value[key]);
-      }
-    }
+    this.assign(value);
   }
   get(key: any): any;
   get(): Map<any, any>;
@@ -299,5 +292,16 @@ class ObsMapImpl extends Owner implements ObsMap<any, any> {
   delete(key: any): void {
     this._map.delete(key);
     this._inc();
+  }
+  assign(value: any): void {
+    if (value instanceof Map) {
+      for(const e of value.entries()){
+        this.set(e[0], e[1]);
+      }
+    } else if (value && typeof value === 'object') {
+      for(const key in value){
+        this.set(key, value[key]);
+      }
+    }
   }
 }
